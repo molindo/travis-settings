@@ -25,9 +25,6 @@
 		<profile>
 			<!-- copied from default travis conf (see defaultSettings.xml) -->
 			<id>standard-with-extra-repos</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<repositories>
 				<repository>
 					<id>sonatype</id>
@@ -107,5 +104,7 @@
 			</repositories>
 		</profile>
 	</profiles>
-	<activeProfiles />
+	<activeProfiles>
+		<activeProfile>standard-with-extra-repos</activeProfile>
+	</activeProfiles>
 </settings>
