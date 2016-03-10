@@ -29,12 +29,8 @@ cat > .travis.yml <<TEMPLATE
 language: java
 
 jdk:
-  - openjdk6
-
-# whitelist
-branches:
-  only:
-    - master
+  - oraclejdk8
+  - openjdk7
 
 # checkout settings
 before_install: 
