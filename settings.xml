@@ -2,11 +2,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-	<localRepository />
-	<interactiveMode />
-	<usePluginRegistry />
-	<offline />
-	<pluginGroups />
 	<servers>
 		<server>
 			<id>sonatype-nexus-snapshots</id>
@@ -19,13 +14,27 @@
 			<password>${env.CI_DEPLOY_PASSWORD}</password>
 		</server>
 	</servers>
-	<mirrors />
-	<proxies />
 	<profiles>
 		<profile>
 			<!-- copied from default travis conf (see defaultSettings.xml) -->
 			<id>standard-with-extra-repos</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
 			<repositories>
+				<repository>
+					<id>central</id>
+					<name>Central Repository</name>
+					<url>http://repo.maven.apache.org/maven2</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+
 				<repository>
 					<id>sonatype</id>
 					<name>OSS Sonatype repo (releases)</name>
@@ -41,6 +50,7 @@
 					</snapshots>
 					<url>https://oss.sonatype.org/content/repositories/releases/</url>
 				</repository>
+
 				<repository>
 					<id>sonatype-snapshots</id>
 					<name>OSS Sonatype repo (snapshots)</name>
@@ -56,6 +66,7 @@
 					</snapshots>
 					<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 				</repository>
+
 				<repository>
 					<id>sonatype-apache</id>
 					<name>Apache repo (releases)</name>
@@ -71,6 +82,7 @@
 					</snapshots>
 					<url>https://repository.apache.org/releases/</url>
 				</repository>
+
 				<repository>
 					<id>apache-snapshots</id>
 					<name>ASF repo (snapshots)</name>
@@ -86,30 +98,7 @@
 					</snapshots>
 					<url>https://repository.apache.org/snapshots/</url>
 				</repository>
-
-				<!-- codehaus.org is no longer available, see https://github.com/travis-ci/travis-ci/issues/4629 -->
-				<!-- commenting out instead of removing to avoid breaking `before_install` workarounds -->
-				<!--
-				<repository>
-					<id>codehaus-snapshots</id>
-					<name>Codehaus (snapshots)</name>
-					<releases>
-						<enabled>false</enabled>
-						<updatePolicy>always</updatePolicy>
-						<checksumPolicy>warn</checksumPolicy>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-						<checksumPolicy>fail</checksumPolicy>
-					</snapshots>
-					<url>https://oss.sonatype.org/content/repositories/codehaus-snapshots/</url>
-				</repository>
-				-->
 			</repositories>
 		</profile>
 	</profiles>
-	<activeProfiles>
-		<activeProfile>standard-with-extra-repos</activeProfile>
-	</activeProfiles>
 </settings>
